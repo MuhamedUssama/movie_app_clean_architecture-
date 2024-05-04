@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/config/routes/routes_name.dart';
 import 'package:movie_app/features/splash/splash_screen.dart';
+import 'package:movie_app/features/tabs/presentation_screen.dart';
 
 class AppRouters {
   static Route onGenerate(RouteSettings settings) {
@@ -8,6 +9,11 @@ class AppRouters {
       case RoutesName.splashScreen:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
+        );
+
+      case RoutesName.presentationScreen:
+        return MaterialPageRoute(
+          builder: (context) => const PresentationScreen(),
         );
 
       default:
