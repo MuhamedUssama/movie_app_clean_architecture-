@@ -13,7 +13,7 @@ class AppRouters {
 
       case RoutesName.presentationScreen:
         return MaterialPageRoute(
-          builder: (context) => const PresentationScreen(),
+          builder: (context) => PresentationScreen(),
         );
 
       default:

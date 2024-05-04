@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/config/routes/app_router.dart';
 import 'package:movie_app/config/routes/routes_name.dart';
-import 'package:movie_app/config/theme/app_colors.dart';
+
+import 'config/theme/app_theme.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({super.key});
@@ -10,10 +11,10 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Movie App',
+      theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesName.splashScreen,
       onGenerateRoute: (settings) => AppRouters.onGenerate(settings),
-      theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldColor),
     );
   }
 }
