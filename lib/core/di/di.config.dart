@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i5;
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -62,6 +63,7 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
+    gh.singleton<Dio>(() => Dio());
     gh.factory<_i3.ApiConsumer>(() => _i4.DioConsumer(client: gh<_i5.Dio>()));
     gh.singleton<_i6.ApiManager>(() => _i6.ApiManager(gh<_i3.ApiConsumer>()));
     gh.factory<_i7.PopularMoviesDataSource>(
