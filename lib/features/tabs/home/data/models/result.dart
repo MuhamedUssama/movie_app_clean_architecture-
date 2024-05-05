@@ -1,6 +1,6 @@
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
 import 'package:movie_app/features/tabs/home/domain/models/top_rated_movies/top_rated_movie.dart';
-import 'package:movie_app/features/tabs/home/domain/models/up_comming_movies/up_coming_movie.dart';
+import 'package:movie_app/features/tabs/home/domain/models/up_comming_movies/up_coming_movies.dart';
 
 class Results {
   bool? adult;
