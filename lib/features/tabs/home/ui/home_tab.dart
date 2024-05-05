@@ -74,8 +74,7 @@ class _HomeTabState extends State<HomeTab> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.network(
-                  "https://image.tmdb.org/t/p/original/${move.backdropPath}" ??
-                      AppImages.imageTest,
+                  "https://image.tmdb.org/t/p/original/${move.backdropPath}",
                   height: MediaQuery.of(context).size.height * .24,
                   fit: BoxFit.fitWidth,
                 ),
