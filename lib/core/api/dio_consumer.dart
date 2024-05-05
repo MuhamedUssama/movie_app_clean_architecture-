@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/api/api_consumer.dart';
 import 'package:movie_app/core/api/app_interceptors.dart';
@@ -30,39 +32,60 @@ class DioConsumer implements ApiConsumer {
       };
 
     client.interceptors.add(AppInterceptors());
+
+    // if (kDebugMode) {
+    //   client.interceptors.add(LogInterceptor(
+    //     request: true,
+    //     requestBody: true,
+    //     requestHeader: true,
+    //     responseHeader: true,
+    //     responseBody: true,
+    //     error: true,
+    //   ));
+    // }
   }
 
   @override
-  Future delete(String path,
-      {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters,
-      Map<String, String>? headers}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future post(
+    String path, {
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    final response = await client.post(path, queryParameters: queryParameters);
+    return jsonEncode(response.data);
   }
 
   @override
-  Future get(String path,
-      {Map<String, dynamic>? queryParameters, Map<String, String>? headers}) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    final response = await client.get(path, queryParameters: queryParameters);
+    return jsonDecode(response.data);
   }
 
   @override
-  Future post(String path,
-      {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters,
-      Map<String, String>? headers}) {
-    // TODO: implement post
-    throw UnimplementedError();
+  Future put(
+    String path, {
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    final response = await client.put(path, queryParameters: queryParameters);
+    return jsonEncode(response.data);
   }
 
   @override
-  Future put(String path,
-      {Map<String, dynamic>? body,
-      Map<String, dynamic>? queryParameters,
-      Map<String, String>? headers}) {
-    // TODO: implement put
-    throw UnimplementedError();
+  Future delete(
+    String path, {
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    final response =
+        await client.delete(path, queryParameters: queryParameters);
+    return jsonEncode(response.data);
   }
 }
