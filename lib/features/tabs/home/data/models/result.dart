@@ -1,4 +1,5 @@
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
+import 'package:movie_app/features/tabs/home/domain/models/top_rated_movies/top_rated_movie.dart';
 
 class Results {
   bool? adult;
@@ -103,6 +104,25 @@ class Results {
 
   PopularMovie toPopularMovie() {
     return PopularMovie(
+      id: id,
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      title: title,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
+  }
+
+  TopRatedMovie toTopRatedMovies() {
+    return TopRatedMovie(
       id: id,
       adult: adult,
       backdropPath: backdropPath,
