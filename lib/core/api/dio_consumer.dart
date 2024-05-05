@@ -4,6 +4,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/api/api_consumer.dart';
+import 'package:movie_app/core/api/app_interceptors.dart';
 import 'package:movie_app/core/api/end_points.dart';
 import 'package:movie_app/core/api/status_code.dart';
 
@@ -27,6 +28,8 @@ class DioConsumer implements ApiConsumer {
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;
       };
+
+    client.interceptors.add(AppInterceptors());
   }
 
   @override
