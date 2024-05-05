@@ -1,23 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/features/tabs/home/domain/usecases/popular_movies_usecase.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/home_tab_states.dart';
+
+import 'popular_movies_states.dart';
 
 @injectable
-class PopularMoviesViewModel extends Cubit<HomeTabStates> {
+class PopularMoviesViewModel extends Cubit<PopularMoviesStates> {
   PopularMoviesUseCase onlinePopularMovies;
 
   @factoryMethod
-  PopularMoviesViewModel(this.onlinePopularMovies) : super(LoadingState());
+  PopularMoviesViewModel(this.onlinePopularMovies)
+      : super(PopularMoviesLoadingState());
 
   void getPopularMovies() async {
-    emit(LoadingState());
+    emit(PopularMoviesLoadingState());
 
     try {
       var popularMovies = await onlinePopularMovies.invoke();
-      emit(SuccessState(popularMovies));
+      emit(PopularMoviesSuccessState(popularMovies));
     } catch (error) {
-      emit(ErrorState(error.toString()));
+      emit(PopularMoviesErrorState(error.toString()));
     }
   }
 }

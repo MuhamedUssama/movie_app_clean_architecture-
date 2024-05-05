@@ -1,23 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/features/tabs/home/domain/usecases/top_rated_movies_usecase.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/home_tab_states.dart';
+
+import 'top_rated_movies_states.dart';
 
 @injectable
-class TopRatedViewModel extends Cubit<HomeTabStates> {
+class TopRatedViewModel extends Cubit<TopRatedMoviesStates> {
   TopRatedMoviesUseCase onlineTopRadedMovies;
 
   @factoryMethod
-  TopRatedViewModel(this.onlineTopRadedMovies) : super(LoadingState());
+  TopRatedViewModel(this.onlineTopRadedMovies)
+      : super(TopRatedMoviesLoadingState());
 
   void getTopRatedMovies() async {
-    emit(LoadingState());
+    emit(TopRatedMoviesLoadingState());
 
     try {
       final movies = await onlineTopRadedMovies.invoke();
-      emit(SuccessState(movies));
+      emit(TopRatedMoviesSuccessState(movies));
     } catch (error) {
-      emit(ErrorState(error.toString()));
+      emit(TopRatedMoviesErrorState(error.toString()));
     }
   }
 }

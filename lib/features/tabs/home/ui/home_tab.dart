@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/core/widgets/error_widget.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/home_tab_states.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/popular_movies_view_model.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/top_rated_view_model.dart';
-import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_view_model.dart';
+import 'package:movie_app/features/tabs/home/ui/cubit/popular_movies/popular_movies_view_model.dart';
+import 'package:movie_app/features/tabs/home/ui/cubit/top_rated_movies/top_rated_view_model.dart';
+import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_movies/up_comming_view_model.dart';
 
+import 'cubit/popular_movies/popular_movies_states.dart';
 import 'widgets/card_of_film.dart';
 
 class HomeTab extends StatefulWidget {
@@ -40,23 +41,26 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          BlocBuilder<PopularMoviesViewModel, HomeTabStates>(
-            bloc: popularMoviesViewModel,
-            builder: (context, state) {
-              if (state is SuccessState) {
-                return buildPopularWidget(state.data as List<PopularMovie>?);
-              } else if (state is ErrorState) {
-                return ErrorView(message: state.message);
-              } else {
-                return SizedBox(
-                    height: MediaQuery.of(context).size.height * .35,
-                    child: const Center(child: LoadingWidget()));
-              }
-            },
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            BlocBuilder<PopularMoviesViewModel, PopularMoviesStates>(
+              bloc: popularMoviesViewModel,
+              builder: (context, state) {
+                if (state is PopularMoviesSuccessState) {
+                  return buildPopularWidget(state.data);
+                } else if (state is PopularMoviesErrorState) {
+                  return CustomErrorWidget(message: state.message);
+                } else {
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height * .35,
+                      child: const Center(child: LoadingWidget()));
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -70,7 +74,8 @@ class _HomeTabState extends State<HomeTab> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.network(
-                  move.backdropPath ?? AppImages.imageTest,
+                  "https://image.tmdb.org/t/p/original/${move.backdropPath}" ??
+                      AppImages.imageTest,
                   height: MediaQuery.of(context).size.height * .24,
                   fit: BoxFit.fitWidth,
                 ),
@@ -116,7 +121,8 @@ class _HomeTabState extends State<HomeTab> {
                 alignment: Alignment.bottomLeft,
                 child: cardImageOfFilm(
                   context: context,
-                  imagePath: move.posterPath!,
+                  imagePath:
+                      "https://image.tmdb.org/t/p/original/${move.posterPath}",
                   moveID: move.id!,
                 ),
               ),
