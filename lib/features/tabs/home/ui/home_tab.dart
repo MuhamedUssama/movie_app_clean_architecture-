@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/core/widgets/loading_widget.dart';
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/home_tab_states.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/popular_movies_view_model.dart';
@@ -46,12 +47,12 @@ class _HomeTabState extends State<HomeTab> {
             builder: (context, state) {
               if (state is SuccessState) {
                 return buildPopularWidget(state.data as List<PopularMovie>?);
-              } else if (state is BaseRequestErrorState) {
+              } else if (state is ErrorState) {
                 return ErrorView(message: state.message);
               } else {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * .35,
-                    child: Center(child: LoadingWidget()));
+                    child: const Center(child: LoadingWidget()));
               }
             },
           ),
