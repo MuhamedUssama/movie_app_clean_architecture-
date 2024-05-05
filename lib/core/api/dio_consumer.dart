@@ -9,6 +9,7 @@ import 'package:movie_app/core/api/api_consumer.dart';
 import 'package:movie_app/core/api/app_interceptors.dart';
 import 'package:movie_app/core/api/end_points.dart';
 import 'package:movie_app/core/api/status_code.dart';
+import 'package:movie_app/core/errors/exceptions.dart';
 
 @Injectable(as: ApiConsumer)
 class DioConsumer implements ApiConsumer {
@@ -52,8 +53,13 @@ class DioConsumer implements ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
-    final response = await client.post(path, queryParameters: queryParameters);
-    return jsonEncode(response.data);
+    try {
+      final response =
+          await client.post(path, queryParameters: queryParameters);
+      return jsonEncode(response.data);
+    } on DioError catch (error) {
+      _handleDioError(error);
+    }
   }
 
   @override
@@ -62,8 +68,12 @@ class DioConsumer implements ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
-    final response = await client.get(path, queryParameters: queryParameters);
-    return jsonDecode(response.data);
+    try {
+      final response = await client.get(path, queryParameters: queryParameters);
+      return jsonDecode(response.data);
+    } on DioError catch (error) {
+      _handleDioError(error);
+    }
   }
 
   @override
@@ -73,8 +83,12 @@ class DioConsumer implements ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
-    final response = await client.put(path, queryParameters: queryParameters);
-    return jsonEncode(response.data);
+    try {
+      final response = await client.put(path, queryParameters: queryParameters);
+      return jsonEncode(response.data);
+    } on DioError catch (error) {
+      _handleDioError(error);
+    }
   }
 
   @override
@@ -84,8 +98,41 @@ class DioConsumer implements ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
-    final response =
-        await client.delete(path, queryParameters: queryParameters);
-    return jsonEncode(response.data);
+    try {
+      final response =
+          await client.delete(path, queryParameters: queryParameters);
+      return jsonEncode(response.data);
+    } on DioError catch (error) {
+      _handleDioError(error);
+    }
+  }
+
+  dynamic _handleDioError(DioError error) {
+    switch (error.type) {
+      case DioErrorType.connectTimeout:
+      case DioErrorType.sendTimeout:
+      case DioErrorType.receiveTimeout:
+        throw const FetchDataException();
+      case DioErrorType.response:
+        switch (error.response?.statusCode) {
+          case StatusCode.badRequest:
+            throw const BadRequestException();
+          case StatusCode.unauthorized:
+          case StatusCode.forbidden:
+            throw const UnauthorizedException();
+          case StatusCode.notFound:
+            throw const NotFoundException();
+          case StatusCode.confilct:
+            throw const ConflictException();
+
+          case StatusCode.internalServerError:
+            throw const InternalServerErrorException();
+        }
+        break;
+      case DioErrorType.cancel:
+        break;
+      case DioErrorType.other:
+        throw const NoInternetConnectionException();
+    }
   }
 }
