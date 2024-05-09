@@ -3,16 +3,19 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/config/theme/app_colors.dart';
+import 'package:movie_app/config/theme/app_text.dart';
 import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/widgets/error_widget.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
+import 'package:movie_app/features/tabs/home/domain/models/top_rated_movies/top_rated_movie.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/popular_movies/popular_movies_view_model.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/top_rated_movies/top_rated_view_model.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_movies/up_comming_view_model.dart';
 
 import 'cubit/popular_movies/popular_movies_states.dart';
+import 'cubit/top_rated_movies/top_rated_movies_states.dart';
 import 'widgets/card_of_film.dart';
 
 class HomeTab extends StatefulWidget {
@@ -53,8 +56,25 @@ class _HomeTabState extends State<HomeTab> {
                 return CustomErrorWidget(message: state.message);
               } else {
                 return SizedBox(
-                    height: MediaQuery.of(context).size.height * .35,
-                    child: const Center(child: LoadingWidget()));
+                  height: MediaQuery.of(context).size.height * .35,
+                  child: const Center(child: LoadingWidget()),
+                );
+              }
+            },
+          ),
+          const SizedBox(height: 24),
+          BlocBuilder<TopRatedViewModel, TopRatedMoviesStates>(
+            bloc: topRatedViewModel,
+            builder: (context, state) {
+              if (state is TopRatedMoviesSuccessState) {
+                return buildNewReleases(state.data);
+              } else if (state is TopRatedMoviesErrorState) {
+                return CustomErrorWidget(message: state.message);
+              } else {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * .35,
+                  child: const Center(child: LoadingWidget()),
+                );
               }
             },
           ),
@@ -65,7 +85,6 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget buildPopularWidget(List<PopularMovie>? popularMovie) {
     double heightOfImage = 0;
-    // double widthOfImage = 0;
     return CarouselSlider(
       items: popularMovie!.map((move) {
         return Stack(
@@ -90,11 +109,6 @@ class _HomeTabState extends State<HomeTab> {
                   //     : widthOfImage,
                   fit: BoxFit.fitWidth,
                 ),
-                // Image.network(
-                //   "https://image.tmdb.org/t/p/original/${move.backdropPath}",
-                //   height: MediaQuery.of(context).size.height * .24,
-                //   fit: BoxFit.fitWidth,
-                // ),
                 Padding(
                   padding: EdgeInsets.only(
                     bottom: 5,
@@ -155,6 +169,41 @@ class _HomeTabState extends State<HomeTab> {
         autoPlay: true,
         autoPlayAnimationDuration: const Duration(milliseconds: 800),
         autoPlayCurve: Curves.ease,
+      ),
+    );
+  }
+
+  Widget buildNewReleases(List<TopRatedMovie>? topRatedMovie) {
+    return Container(
+      height: 200,
+      width: double.infinity,
+      color: AppColors.backgroundList,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 21.0, bottom: 12, top: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("New Releases", style: AppText.listTitle),
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListView.builder(
+                itemCount: topRatedMovie!.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: cardImageOfFilm(
+                      context: context,
+                      imagePath:
+                          "https://image.tmdb.org/t/p/original/${topRatedMovie[index].posterPath}",
+                      moveID: topRatedMovie[index].id!,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
