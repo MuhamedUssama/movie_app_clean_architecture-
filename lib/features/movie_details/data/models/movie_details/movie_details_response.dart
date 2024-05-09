@@ -1,4 +1,4 @@
-class MovieDetails {
+class MovieDetailsResponse {
   bool? adult;
   String? backdropPath;
   dynamic belongsToCollection;
@@ -29,7 +29,7 @@ class MovieDetails {
   int? statusCode;
   String? statusMessage;
 
-  MovieDetails({
+  MovieDetailsResponse({
     this.adult,
     this.backdropPath,
     this.belongsToCollection,
@@ -61,7 +61,7 @@ class MovieDetails {
     this.statusMessage,
   });
 
-  MovieDetails.fromJson(dynamic json) {
+  MovieDetailsResponse.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     belongsToCollection = json['belongs_to_collection'];
@@ -115,7 +115,7 @@ class MovieDetails {
     statusMessage = json['status_message'];
   }
 
-  MovieDetails copyWith({
+  MovieDetailsResponse copyWith({
     bool? adult,
     String? backdropPath,
     dynamic belongsToCollection,
@@ -143,7 +143,7 @@ class MovieDetails {
     double? voteAverage,
     int? voteCount,
   }) =>
-      MovieDetails(
+      MovieDetailsResponse(
         adult: adult ?? this.adult,
         backdropPath: backdropPath ?? this.backdropPath,
         belongsToCollection: belongsToCollection ?? this.belongsToCollection,

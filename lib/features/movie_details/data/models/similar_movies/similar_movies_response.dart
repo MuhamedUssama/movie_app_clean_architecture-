@@ -1,4 +1,4 @@
-class SimilarMovies {
+class SimilarMoviesResponse {
   int? page;
   List<Results>? results;
   int? totalPages;
@@ -7,7 +7,7 @@ class SimilarMovies {
   int? statusCode;
   String? statusMessage;
 
-  SimilarMovies({
+  SimilarMoviesResponse({
     this.page,
     this.results,
     this.totalPages,
@@ -17,7 +17,7 @@ class SimilarMovies {
     this.statusMessage,
   });
 
-  SimilarMovies.fromJson(dynamic json) {
+  SimilarMoviesResponse.fromJson(dynamic json) {
     page = json['page'];
     if (json['results'] != null) {
       results = [];
@@ -32,13 +32,13 @@ class SimilarMovies {
     statusMessage = json['status_message'];
   }
 
-  SimilarMovies copyWith({
+  SimilarMoviesResponse copyWith({
     int? page,
     List<Results>? results,
     int? totalPages,
     int? totalResults,
   }) =>
-      SimilarMovies(
+      SimilarMoviesResponse(
         page: page ?? this.page,
         results: results ?? this.results,
         totalPages: totalPages ?? this.totalPages,
