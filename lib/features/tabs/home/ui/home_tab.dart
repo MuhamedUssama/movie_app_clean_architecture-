@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,31 +42,30 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            BlocBuilder<PopularMoviesViewModel, PopularMoviesStates>(
-              bloc: popularMoviesViewModel,
-              builder: (context, state) {
-                if (state is PopularMoviesSuccessState) {
-                  return buildPopularWidget(state.data);
-                } else if (state is PopularMoviesErrorState) {
-                  return CustomErrorWidget(message: state.message);
-                } else {
-                  return SizedBox(
-                      height: MediaQuery.of(context).size.height * .35,
-                      child: const Center(child: LoadingWidget()));
-                }
-              },
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          BlocBuilder<PopularMoviesViewModel, PopularMoviesStates>(
+            bloc: popularMoviesViewModel,
+            builder: (context, state) {
+              if (state is PopularMoviesSuccessState) {
+                return buildPopularWidget(state.data);
+              } else if (state is PopularMoviesErrorState) {
+                return CustomErrorWidget(message: state.message);
+              } else {
+                return SizedBox(
+                    height: MediaQuery.of(context).size.height * .35,
+                    child: const Center(child: LoadingWidget()));
+              }
+            },
+          ),
+        ],
       ),
     );
   }
 
   Widget buildPopularWidget(List<PopularMovie>? popularMovie) {
+    double heightOfImage = 0;
+    // double widthOfImage = 0;
     return CarouselSlider(
       items: popularMovie!.map((move) {
         return Stack(
@@ -73,11 +73,28 @@ class _HomeTabState extends State<HomeTab> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.network(
-                  "https://image.tmdb.org/t/p/original/${move.backdropPath}",
-                  height: MediaQuery.of(context).size.height * .24,
+                CachedNetworkImage(
+                  imageUrl:
+                      "https://image.tmdb.org/t/p/original/${move.backdropPath}",
+                  errorWidget: (_, __, ___) => Image.asset(
+                    AppImages.imageTest,
+                    height: MediaQuery.of(context).size.height * .24,
+                    // width: MediaQuery.of(context).size.width * .4,
+                    fit: BoxFit.cover,
+                  ),
+                  height: heightOfImage == 0
+                      ? MediaQuery.of(context).size.height * .24
+                      : heightOfImage,
+                  // width: widthOfImage == 0
+                  //     ? MediaQuery.of(context).size.width * .26
+                  //     : widthOfImage,
                   fit: BoxFit.fitWidth,
                 ),
+                // Image.network(
+                //   "https://image.tmdb.org/t/p/original/${move.backdropPath}",
+                //   height: MediaQuery.of(context).size.height * .24,
+                //   fit: BoxFit.fitWidth,
+                // ),
                 Padding(
                   padding: EdgeInsets.only(
                     bottom: 5,
