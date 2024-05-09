@@ -16,6 +16,7 @@ import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_movies/up_commi
 
 import 'cubit/popular_movies/popular_movies_states.dart';
 import 'cubit/top_rated_movies/top_rated_movies_states.dart';
+import 'cubit/up_comming_movies/up_comming_states.dart';
 import 'widgets/card_of_film.dart';
 
 class HomeTab extends StatefulWidget {
@@ -69,6 +70,22 @@ class _HomeTabState extends State<HomeTab> {
               if (state is TopRatedMoviesSuccessState) {
                 return buildNewReleases(state.data);
               } else if (state is TopRatedMoviesErrorState) {
+                return CustomErrorWidget(message: state.message);
+              } else {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * .35,
+                  child: const Center(child: LoadingWidget()),
+                );
+              }
+            },
+          ),
+          const SizedBox(height: 30),
+          BlocBuilder<UpCommingMoviesViewModel, UpCommingMoviesStates>(
+            bloc: upCommingViewModel,
+            builder: (context, state) {
+              if (state is UpCommingMoviesSuccessState) {
+                return buildRecomended();
+              } else if (state is UpCommingMoviesErrorState) {
                 return CustomErrorWidget(message: state.message);
               } else {
                 return SizedBox(
@@ -202,6 +219,24 @@ class _HomeTabState extends State<HomeTab> {
                 },
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildRecomended() {
+    return Container(
+      height: 280,
+      width: double.infinity,
+      color: AppColors.backgroundList,
+      child: const Padding(
+        padding: EdgeInsets.only(left: 21.0, bottom: 12, top: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Recomended", style: AppText.listTitle),
+            SizedBox(height: 12),
           ],
         ),
       ),

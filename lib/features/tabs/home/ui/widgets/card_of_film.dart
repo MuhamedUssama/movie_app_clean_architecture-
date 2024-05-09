@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 
+import 'wishlist_icon.dart';
+
 Widget cardImageOfFilm({
   required BuildContext context,
   required String imagePath,
@@ -50,25 +52,9 @@ Widget cardImageOfFilm({
               fit: BoxFit.cover,
             ),
           ),
-          Container(
-            height: heightOfTicket == 0
-                ? MediaQuery.of(context).size.height * .064
-                : heightOfTicket,
-            width: widthOfTicket == 0
-                ? MediaQuery.of(context).size.width * .09
-                : widthOfTicket,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(.7),
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(10)),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.add,
-                color: AppColors.white,
-                size: MediaQuery.of(context).size.width * .08,
-              ),
-            ),
+          CustomWishListIcon(
+            heightOfTicket: heightOfTicket,
+            widthOfTicket: widthOfTicket,
           ),
         ],
       ),
