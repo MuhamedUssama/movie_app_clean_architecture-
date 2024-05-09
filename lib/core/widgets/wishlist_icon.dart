@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../config/theme/app_colors.dart';
+import '../../config/theme/app_colors.dart';
 
 class CustomWishListIcon extends StatelessWidget {
   final double heightOfTicket;
@@ -19,7 +19,7 @@ class CustomWishListIcon extends StatelessWidget {
           : widthOfTicket,
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(.7),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(10)),
       ),
       child: Center(
         child: Icon(

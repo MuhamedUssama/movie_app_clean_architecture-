@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/config/theme/app_text.dart';
 import 'package:movie_app/core/utils/app_images.dart';
-import 'package:movie_app/features/tabs/home/ui/widgets/wishlist_icon.dart';
+import 'package:movie_app/core/widgets/wishlist_icon.dart';
 
 class CustomRecomendedCardWidget extends StatelessWidget {
   final String imagePath;

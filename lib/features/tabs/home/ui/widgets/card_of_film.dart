@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 
-import 'wishlist_icon.dart';
+import '../../../../../core/widgets/wishlist_icon.dart';
 
 Widget cardImageOfFilm({
   required BuildContext context,
