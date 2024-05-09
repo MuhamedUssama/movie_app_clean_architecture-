@@ -9,4 +9,5 @@ abstract class AppColors {
   static const Color white = Colors.white;
   static const Color grey = Color(0XFFB5B4B4);
   static const Color blackGrey = Color(0XFF3a3939);
+  static const Color cardBackground = Color(0XFF343534);
 }

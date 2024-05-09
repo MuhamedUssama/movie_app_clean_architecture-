@@ -10,6 +10,7 @@ import 'package:movie_app/core/widgets/error_widget.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
 import 'package:movie_app/features/tabs/home/domain/models/popular_movies/popular_movie.dart';
 import 'package:movie_app/features/tabs/home/domain/models/top_rated_movies/top_rated_movie.dart';
+import 'package:movie_app/features/tabs/home/domain/models/up_comming_movies/up_coming_movies.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/popular_movies/popular_movies_view_model.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/top_rated_movies/top_rated_view_model.dart';
 import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_movies/up_comming_view_model.dart';
@@ -18,6 +19,7 @@ import 'cubit/popular_movies/popular_movies_states.dart';
 import 'cubit/top_rated_movies/top_rated_movies_states.dart';
 import 'cubit/up_comming_movies/up_comming_states.dart';
 import 'widgets/card_of_film.dart';
+import 'widgets/custom_recomended_card_widget.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -84,7 +86,7 @@ class _HomeTabState extends State<HomeTab> {
             bloc: upCommingViewModel,
             builder: (context, state) {
               if (state is UpCommingMoviesSuccessState) {
-                return buildRecomended();
+                return buildRecomended(state.data!);
               } else if (state is UpCommingMoviesErrorState) {
                 return CustomErrorWidget(message: state.message);
               } else {
@@ -225,18 +227,36 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Widget buildRecomended() {
+  Widget buildRecomended(List<UpComingMovie> recomendedMovie) {
     return Container(
-      height: 280,
+      height: 320,
       width: double.infinity,
       color: AppColors.backgroundList,
-      child: const Padding(
-        padding: EdgeInsets.only(left: 21.0, bottom: 12, top: 12),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 21.0, bottom: 12, top: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Recomended", style: AppText.listTitle),
-            SizedBox(height: 12),
+            const Text("Recomended", style: AppText.listTitle),
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListView.builder(
+                itemCount: recomendedMovie.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: CustomRecomendedCardWidget(
+                    context: context,
+                    imagePath:
+                        "https://image.tmdb.org/t/p/original/${recomendedMovie[index].posterPath}",
+                    moveID: recomendedMovie[index].id!,
+                    movieTitle: recomendedMovie[index].title ?? "",
+                    voteAverage: recomendedMovie[index].voteAverage!,
+                    releaseDate: recomendedMovie[index].releaseDate ?? "",
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
