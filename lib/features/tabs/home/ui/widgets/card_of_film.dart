@@ -43,10 +43,10 @@ Widget cardImageOfFilm({
                 fit: BoxFit.cover,
               ),
               height: heightOfImage == 0
-                  ? MediaQuery.of(context).size.height * .18
+                  ? MediaQuery.of(context).size.height * .2
                   : heightOfImage,
               width: widthOfImage == 0
-                  ? MediaQuery.of(context).size.width * .26
+                  ? MediaQuery.of(context).size.width * .3
                   : widthOfImage,
               fit: BoxFit.cover,
             ),

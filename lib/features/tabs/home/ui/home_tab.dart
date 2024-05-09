@@ -97,6 +97,7 @@ class _HomeTabState extends State<HomeTab> {
               }
             },
           ),
+          const SizedBox(height: 24),
         ],
       ),
     );
@@ -194,7 +195,7 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget buildNewReleases(List<TopRatedMovie>? topRatedMovie) {
     return Container(
-      height: 200,
+      height: 220,
       width: double.infinity,
       color: AppColors.backgroundList,
       child: Padding(
