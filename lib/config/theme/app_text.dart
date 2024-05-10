@@ -44,4 +44,10 @@ abstract class AppText {
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle MovieDetailslistTitle = TextStyle(
+    color: AppColors.white,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+  );
 }
