@@ -10,6 +10,13 @@ abstract class AppTheme {
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.scaffoldColor,
+      shadowColor: AppColors.transparent,
+      titleTextStyle: TextStyle(
+        color: AppColors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+      ),
+      centerTitle: true,
     ),
   );
 }

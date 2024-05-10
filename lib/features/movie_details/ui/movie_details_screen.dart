@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
 
@@ -25,7 +26,9 @@ class MovieDetailsScreen extends StatelessWidget {
         } else if (state is MovieDetailsSuccessState) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(state.movieDetails!.title ?? ""),
+              title: Text(
+                state.movieDetails!.title ?? "",
+              ),
             ),
             body: Center(
               child: Text(
