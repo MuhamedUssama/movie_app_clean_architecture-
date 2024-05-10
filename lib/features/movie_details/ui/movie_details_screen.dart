@@ -11,6 +11,7 @@ import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/error_widget.dart';
 import 'cubits/movie_details/movie_details_states.dart';
 import 'cubits/movie_details/movie_details_view_model.dart';
+import 'widgets/details_of_movie_details.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final String movieId;
@@ -48,19 +49,24 @@ class MovieDetailsScreen extends StatelessWidget {
           movie.title ?? "",
         ),
       ),
-      body: Column(
-        children: [
-          CachedNetworkImage(
-            height: 218.h,
-            width: double.infinity,
-            imageUrl: AppStrings.networkImageBaseUrl + movie.backdropPath!,
-            errorWidget: (_, __, ___) => Image.asset(
-              AppImages.imageTest,
-              height: MediaQuery.of(context).size.height * .24,
-              fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CachedNetworkImage(
+              height: 218.h,
+              width: double.infinity,
+              imageUrl: AppStrings.networkImageBaseUrl + movie.backdropPath!,
+              errorWidget: (_, __, ___) => Image.asset(
+                AppImages.imageTest,
+                height: MediaQuery.of(context).size.height * .24,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 12.h),
+            DetailsOfMovieDetails(movie: movie),
+          ],
+        ),
       ),
     );
   }
