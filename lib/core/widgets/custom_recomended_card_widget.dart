@@ -4,6 +4,7 @@ import 'package:movie_app/config/theme/app_colors.dart';
 import 'package:movie_app/config/theme/app_text.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/widgets/wishlist_icon.dart';
+import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 
 class CustomRecomendedCardWidget extends StatelessWidget {
   final String imagePath;
@@ -41,12 +42,14 @@ class CustomRecomendedCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // if (inDetails == false) {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => FilmDetailsScreen("$moveID")));
-        // }
+        if (inDetails == false) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MovieDetailsScreen(movieId: "$moveID"),
+            ),
+          );
+        }
       },
       child: Stack(
         children: [

@@ -18,8 +18,8 @@ import 'package:movie_app/features/tabs/home/ui/cubit/up_comming_movies/up_commi
 import 'cubit/popular_movies/popular_movies_states.dart';
 import 'cubit/top_rated_movies/top_rated_movies_states.dart';
 import 'cubit/up_comming_movies/up_comming_states.dart';
-import 'widgets/card_of_film.dart';
-import 'widgets/custom_recomended_card_widget.dart';
+import '../../../../core/widgets/card_of_film.dart';
+import '../../../../core/widgets/custom_recomended_card_widget.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});

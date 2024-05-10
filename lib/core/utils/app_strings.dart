@@ -4,4 +4,7 @@ abstract class AppStrings {
 
   static const String contentType = "accept";
   static const String applicationJson = "application/json";
+
+  static const String networkImageBaseUrl =
+      "https://image.tmdb.org/t/p/original/";
 }

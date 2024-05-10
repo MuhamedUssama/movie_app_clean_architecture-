@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 
-import '../../../../../core/widgets/wishlist_icon.dart';
+import 'wishlist_icon.dart';
 
 Widget cardImageOfFilm({
   required BuildContext context,
@@ -14,15 +15,18 @@ Widget cardImageOfFilm({
   double heightOfTicket = 0,
   double widthOfTicket = 0,
   bool inDetails = false,
+  double iconSize = 0,
 }) =>
     InkWell(
       onTap: () {
-        // if (inDetails == false) {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => FilmDetailsScreen("$moveID")));
-        // }
+        if (inDetails == false) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MovieDetailsScreen(movieId: "$moveID"),
+            ),
+          );
+        }
       },
       child: Stack(
         children: [
@@ -54,6 +58,7 @@ Widget cardImageOfFilm({
           CustomWishListIcon(
             heightOfTicket: heightOfTicket,
             widthOfTicket: widthOfTicket,
+            iconSize: iconSize,
           ),
         ],
       ),

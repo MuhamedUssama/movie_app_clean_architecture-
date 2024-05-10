@@ -1,3 +1,5 @@
+import '../../../domain/models/similar_movies/similar_movie.dart';
+
 class SimilarMoviesResponse {
   int? page;
   List<Results>? results;
@@ -155,5 +157,24 @@ class Results {
     map['vote_average'] = voteAverage;
     map['vote_count'] = voteCount;
     return map;
+  }
+
+  SimilarMovie toSimilarMovie() {
+    return SimilarMovie(
+      id: id,
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      title: title,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
   }
 }
