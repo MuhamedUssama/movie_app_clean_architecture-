@@ -7,25 +7,16 @@ import '../../../core/widgets/error_widget.dart';
 import 'cubits/movie_details/movie_details_states.dart';
 import 'cubits/movie_details/movie_details_view_model.dart';
 
-class MovieDetailsScreen extends StatefulWidget {
+class MovieDetailsScreen extends StatelessWidget {
   final String movieId;
   const MovieDetailsScreen({super.key, required this.movieId});
 
   @override
-  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
-}
-
-class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
-  var movieDetailsVewModel = getIt.get<MovieDetailsViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    movieDetailsVewModel.getMovie(widget.movieId);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var movieDetailsVewModel = getIt.get<MovieDetailsViewModel>();
+
+    movieDetailsVewModel.getMovie(movieId);
+
     return BlocBuilder<MovieDetailsViewModel, MovieDetailsStates>(
       bloc: movieDetailsVewModel,
       builder: (context, state) {
@@ -38,7 +29,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             ),
             body: Center(
               child: Text(
-                'ID: ${widget.movieId}',
+                'ID: $movieId',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 32,
