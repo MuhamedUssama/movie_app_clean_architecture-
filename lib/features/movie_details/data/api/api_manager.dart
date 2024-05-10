@@ -6,9 +6,9 @@ import 'package:movie_app/features/movie_details/data/models/similar_movies/simi
 
 @singleton
 @injectable
-class MovieDetailsFeatureApiMnager {
+class MovieDetailsFeatureApiManager {
   ApiConsumer apiConsumer;
-  MovieDetailsFeatureApiMnager(this.apiConsumer);
+  MovieDetailsFeatureApiManager(this.apiConsumer);
 
   Future<MovieDetailsResponse>? getMovieDetails(String? movieId) async {
     final json = await apiConsumer.get(EndPoints.baseUrl + movieId!);
