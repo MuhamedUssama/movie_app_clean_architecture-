@@ -6,9 +6,16 @@ class MovieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: Text('Movie Details Screen'),
+        child: Text(
+          'ID: $movieId',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+          ),
+        ),
       ),
     );
   }

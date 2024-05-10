@@ -13,7 +13,7 @@ class MovieApp extends StatelessWidget {
       title: 'Movie App',
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesName.movieDetailsScreen,
+      initialRoute: RoutesName.splashScreen,
       onGenerateRoute: (settings) => AppRouters.onGenerate(settings),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 
 import '../../../../../core/widgets/wishlist_icon.dart';
 
@@ -17,12 +18,14 @@ Widget cardImageOfFilm({
 }) =>
     InkWell(
       onTap: () {
-        // if (inDetails == false) {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => FilmDetailsScreen("$moveID")));
-        // }
+        if (inDetails == false) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MovieDetailsScreen(movieId: "$moveID"),
+            ),
+          );
+        }
       },
       child: Stack(
         children: [

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/config/routes/routes_name.dart';
+import 'package:movie_app/features/movie_details/domain/models/movie_details/movie_details.dart';
 import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 import 'package:movie_app/features/splash/splash_screen.dart';
 import 'package:movie_app/features/tabs/presentation_screen.dart';
 
 class AppRouters {
+  static MovieDetails movieDetails = MovieDetails();
+
   static Route onGenerate(RouteSettings settings) {
     switch (settings.name) {
       case RoutesName.splashScreen:
@@ -19,7 +22,8 @@ class AppRouters {
 
       case RoutesName.movieDetailsScreen:
         return MaterialPageRoute(
-          builder: (context) => const MovieDetailsScreen(movieId: ""),
+          builder: (context) =>
+              MovieDetailsScreen(movieId: "${movieDetails.id}"),
         );
 
       default:
