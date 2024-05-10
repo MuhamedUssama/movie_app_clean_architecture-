@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/config/routes/routes_name.dart';
+import 'package:movie_app/features/movie_details/ui/movie_details_screen.dart';
 import 'package:movie_app/features/splash/splash_screen.dart';
 import 'package:movie_app/features/tabs/presentation_screen.dart';
 
@@ -14,6 +15,11 @@ class AppRouters {
       case RoutesName.presentationScreen:
         return MaterialPageRoute(
           builder: (context) => PresentationScreen(),
+        );
+
+      case RoutesName.movieDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) => const MovieDetailsScreen(movieId: ""),
         );
 
       default:
