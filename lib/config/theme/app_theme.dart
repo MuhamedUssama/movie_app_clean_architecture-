@@ -8,5 +8,8 @@ abstract class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.bottomNavBar,
     ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.scaffoldColor,
+    ),
   );
 }

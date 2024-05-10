@@ -8,6 +8,8 @@ import 'package:movie_app/features/movie_details/data/models/similar_movies/simi
 @injectable
 class MovieDetailsFeatureApiManager {
   ApiConsumer apiConsumer;
+
+  @factoryMethod
   MovieDetailsFeatureApiManager(this.apiConsumer);
 
   Future<MovieDetailsResponse>? getMovieDetails(String? movieId) async {
