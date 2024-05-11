@@ -1,3 +1,5 @@
+import 'package:movie_app/features/tabs/search/domain/models/search_dto.dart';
+
 class Results {
   bool? adult;
   String? backdropPath;
@@ -97,5 +99,24 @@ class Results {
     map['vote_average'] = voteAverage;
     map['vote_count'] = voteCount;
     return map;
+  }
+
+  SearchDto toSearchResult() {
+    return SearchDto(
+      id: id,
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      title: title,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
   }
 }
