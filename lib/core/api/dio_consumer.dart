@@ -13,10 +13,11 @@ import 'package:movie_app/core/errors/exceptions.dart';
 
 @Injectable(as: ApiConsumer)
 class DioConsumer implements ApiConsumer {
-  final Dio client;
+  @singleton
+  final Dio client = Dio();
 
   @factoryMethod
-  DioConsumer({required this.client}) {
+  DioConsumer() {
     (client.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
