@@ -13,14 +13,16 @@ class SearchViewModel extends Cubit<SearchStates> {
   SearchViewModel(this.searchUseCase) : super(SearchInitialState());
 
   void getSearchedMovies() async {
-    emit(SearchInitialState());
-
-    try {
-      emit(SearchLoadingState());
-      final movies = await searchUseCase.invoke(searchQuery.text);
-      emit(SearchSuccessState(movies));
-    } catch (error) {
-      emit(SearchErrorState(error.toString()));
+    if (searchQuery.text == "") {
+      emit(SearchInitialState());
+    } else {
+      try {
+        emit(SearchLoadingState());
+        final movies = await searchUseCase.invoke(searchQuery.text);
+        emit(SearchSuccessState(movies));
+      } catch (error) {
+        emit(SearchErrorState(error.toString()));
+      }
     }
   }
 }

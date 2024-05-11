@@ -1,21 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/di/di.dart';
+import 'package:movie_app/features/tabs/search/ui/cubit/search_states.dart';
 
+import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/widgets/no_movies_found.dart';
+import 'cubit/search_view_model.dart';
 import 'widgets/custom_search_textfield.dart';
 
-class SearchTab extends StatelessWidget {
+class SearchTab extends StatefulWidget {
   const SearchTab({super.key});
+
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
+  SearchViewModel viewModel = getIt.get<SearchViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.getSearchedMovies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    viewModel.searchQuery.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        child: const Column(
+        child: Column(
           children: [
-            CustomSearchTextField(),
+            CustomSearchTextField(
+                controller: viewModel.searchQuery,
+                function: viewModel.getSearchedMovies),
+            BlocBuilder<SearchViewModel, SearchStates>(
+              bloc: viewModel,
+              builder: (context, state) {
+                if (state is SearchLoadingState) {
+                  return const Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(child: LoadingWidget()),
+                      ],
+                    ),
+                  );
+                } else if (state is SearchErrorState) {
+                  return CustomErrorWidget(message: state.errorMessage);
+                } else if (state is SearchSuccessState) {
+                  return _buildSearchedMoviesList();
+                } else if (state is SearchInitialState) {
+                  return const NoMoviesFoundWidget();
+                } else {
+                  return const NoMoviesFoundWidget();
+                }
+              },
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSearchedMoviesList() {
+    return const Text(
+      "Search Screen",
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 40,
       ),
     );
   }

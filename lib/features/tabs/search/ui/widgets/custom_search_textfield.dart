@@ -5,12 +5,20 @@ import '../../../../../config/theme/app_colors.dart';
 import '../../../../../config/theme/app_text.dart';
 
 class CustomSearchTextField extends StatelessWidget {
-  const CustomSearchTextField({super.key});
+  final TextEditingController controller;
+  final Function function;
+  const CustomSearchTextField(
+      {super.key, required this.controller, required this.function});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       style: AppText.searchInputText,
+      controller: controller,
+      onChanged: (value) {
+        value = controller.text;
+        function();
+      },
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50.r),

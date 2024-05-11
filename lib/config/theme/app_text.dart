@@ -62,4 +62,10 @@ abstract class AppText {
     fontSize: 16.sp,
     fontWeight: FontWeight.w300,
   );
+
+  static TextStyle noMoviesFound = TextStyle(
+    color: AppColors.grey,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  );
 }
