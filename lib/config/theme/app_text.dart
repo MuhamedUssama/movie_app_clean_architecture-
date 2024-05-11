@@ -50,4 +50,16 @@ abstract class AppText {
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle searchHintStyle = TextStyle(
+    color: AppColors.white.withOpacity(0.46),
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle searchInputText = TextStyle(
+    color: AppColors.white,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w300,
+  );
 }
