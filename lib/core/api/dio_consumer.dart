@@ -28,6 +28,7 @@ class DioConsumer implements ApiConsumer {
     client.options
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
+      // ..responseType = ResponseType.stream
       ..followRedirects = false
       ..validateStatus = (status) {
         return status! < StatusCode.internalServerError;
@@ -68,9 +69,14 @@ class DioConsumer implements ApiConsumer {
     String path, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
+    Options? options,
   }) async {
     try {
-      final response = await client.get(path, queryParameters: queryParameters);
+      final response = await client.get(
+        path,
+        queryParameters: queryParameters,
+        options: options,
+      );
       return jsonDecode(response.data);
     } on DioError catch (error) {
       _handleDioError(error);
