@@ -17,62 +17,62 @@ import '../../features/movie_details/data/data_sources/remote/movie_deatils/movi
 import '../../features/movie_details/data/data_sources/remote/movie_deatils/movie_details_data_source_impl.dart'
     as _i8;
 import '../../features/movie_details/data/data_sources/remote/similar_movies/similar_movies_data_source.dart'
-    as _i25;
-import '../../features/movie_details/data/data_sources/remote/similar_movies/similar_movies_data_source_impl.dart'
     as _i26;
+import '../../features/movie_details/data/data_sources/remote/similar_movies/similar_movies_data_source_impl.dart'
+    as _i27;
 import '../../features/movie_details/data/repository_impl/movie_details_repository_impl.dart'
     as _i10;
 import '../../features/movie_details/data/repository_impl/similar_movies_repository_impl.dart'
-    as _i28;
+    as _i29;
 import '../../features/movie_details/domain/repository/movie_details_repository.dart'
     as _i9;
 import '../../features/movie_details/domain/repository/similar_movies_repository.dart'
-    as _i27;
+    as _i28;
 import '../../features/movie_details/domain/usecases/movie_details_usecase.dart'
     as _i11;
 import '../../features/movie_details/domain/usecases/similar_movies_usecase.dart'
-    as _i29;
+    as _i30;
 import '../../features/movie_details/ui/cubits/movie_details/movie_details_view_model.dart'
     as _i12;
 import '../../features/movie_details/ui/cubits/similar_movies/similar_movies_view_model.dart'
-    as _i30;
+    as _i31;
 import '../../features/tabs/home/data/api/api_manager.dart' as _i5;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source.dart'
     as _i13;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source_impl.dart'
     as _i14;
 import '../../features/tabs/home/data/data_source/remote/top_rated_movies/top_rated_movies_data_source.dart'
-    as _i31;
-import '../../features/tabs/home/data/data_source/remote/top_rated_movies/top_rated_movies_data_source_impl.dart'
     as _i32;
+import '../../features/tabs/home/data/data_source/remote/top_rated_movies/top_rated_movies_data_source_impl.dart'
+    as _i33;
 import '../../features/tabs/home/data/data_source/remote/up_comming_movies/up_comming_movies_data_source.dart'
-    as _i37;
-import '../../features/tabs/home/data/data_source/remote/up_comming_movies/up_comming_movies_data_source_impl.dart'
     as _i38;
+import '../../features/tabs/home/data/data_source/remote/up_comming_movies/up_comming_movies_data_source_impl.dart'
+    as _i39;
 import '../../features/tabs/home/data/repository_impl/popular_movies_repository_impl.dart'
     as _i16;
 import '../../features/tabs/home/data/repository_impl/top_rated_movies_repository_impl.dart'
-    as _i34;
+    as _i35;
 import '../../features/tabs/home/data/repository_impl/up_comming_movies_repository_impl.dart'
-    as _i40;
+    as _i41;
 import '../../features/tabs/home/domain/repository/popular_movies_repository.dart'
     as _i15;
 import '../../features/tabs/home/domain/repository/top_rated_movies_repository.dart'
-    as _i33;
+    as _i34;
 import '../../features/tabs/home/domain/repository/up_comming_movies_repository.dart'
-    as _i39;
+    as _i40;
 import '../../features/tabs/home/domain/usecases/popular_movies_usecase.dart'
     as _i17;
 import '../../features/tabs/home/domain/usecases/top_rated_movies_usecase.dart'
-    as _i35;
+    as _i36;
 import '../../features/tabs/home/domain/usecases/up_comming_movies_usecase.dart'
-    as _i41;
+    as _i42;
 import '../../features/tabs/home/ui/cubit/popular_movies/popular_movies_view_model.dart'
     as _i18;
 import '../../features/tabs/home/ui/cubit/top_rated_movies/top_rated_view_model.dart'
-    as _i36;
+    as _i37;
 import '../../features/tabs/home/ui/cubit/up_comming_movies/up_comming_view_model.dart'
-    as _i42;
+    as _i43;
 import '../../features/tabs/presentation_view_model.dart' as _i19;
 import '../../features/tabs/search/data/api/search_api_manager.dart' as _i20;
 import '../../features/tabs/search/data/data_sources/search_data_source.dart'
@@ -83,6 +83,7 @@ import '../../features/tabs/search/data/repository_impl/search_repository_impl.d
     as _i24;
 import '../../features/tabs/search/domain/repository/search_repository.dart'
     as _i23;
+import '../../features/tabs/search/domain/usecases/search_usecase.dart' as _i25;
 import '../api/api_consumer.dart' as _i3;
 import '../api/dio_consumer.dart' as _i4;
 
@@ -127,33 +128,35 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i22.SearchDataSourceImpl(gh<_i20.SearchApimanager>()));
     gh.factory<_i23.SearchRepository>(
         () => _i24.SearchRepositoryImpl(gh<_i21.SearchDataSource>()));
-    gh.factory<_i25.SimilarMoviesOnlineDataSource>(() =>
-        _i26.SimilarMoviesOnlineDataSourceImpl(
+    gh.factory<_i25.SearchUseCase>(
+        () => _i25.SearchUseCase(gh<_i23.SearchRepository>()));
+    gh.factory<_i26.SimilarMoviesOnlineDataSource>(() =>
+        _i27.SimilarMoviesOnlineDataSourceImpl(
             gh<_i6.MovieDetailsFeatureApiManager>()));
-    gh.factory<_i27.SimilarMoviesRepository>(() =>
-        _i28.SimilarMoviesRepositoryImpl(
-            gh<_i25.SimilarMoviesOnlineDataSource>()));
-    gh.factory<_i29.SimilarMoviesUseCase>(
-        () => _i29.SimilarMoviesUseCase(gh<_i27.SimilarMoviesRepository>()));
-    gh.factory<_i30.SimilarMoviesViewModel>(
-        () => _i30.SimilarMoviesViewModel(gh<_i29.SimilarMoviesUseCase>()));
-    gh.factory<_i31.TopRatedMoviesDataSource>(
-        () => _i32.TopRatedMoviesDataSourceImpl(gh<_i5.ApiManager>()));
-    gh.factory<_i33.TopRatedMoviesRepository>(() =>
-        _i34.TopRatedMoviesRepositoryImpl(gh<_i31.TopRatedMoviesDataSource>()));
-    gh.factory<_i35.TopRatedMoviesUseCase>(
-        () => _i35.TopRatedMoviesUseCase(gh<_i33.TopRatedMoviesRepository>()));
-    gh.factory<_i36.TopRatedViewModel>(
-        () => _i36.TopRatedViewModel(gh<_i35.TopRatedMoviesUseCase>()));
-    gh.factory<_i37.UpCommingMoviesDataSource>(
-        () => _i38.UpCommingMoviesDataSourceImpl(gh<_i5.ApiManager>()));
-    gh.factory<_i39.UpCommingMoviesRepository>(() =>
-        _i40.UpCommingMoviesRepositoryImpl(
-            gh<_i37.UpCommingMoviesDataSource>()));
-    gh.factory<_i41.UpCommingMoviesUseCase>(() =>
-        _i41.UpCommingMoviesUseCase(gh<_i39.UpCommingMoviesRepository>()));
-    gh.factory<_i42.UpCommingMoviesViewModel>(
-        () => _i42.UpCommingMoviesViewModel(gh<_i41.UpCommingMoviesUseCase>()));
+    gh.factory<_i28.SimilarMoviesRepository>(() =>
+        _i29.SimilarMoviesRepositoryImpl(
+            gh<_i26.SimilarMoviesOnlineDataSource>()));
+    gh.factory<_i30.SimilarMoviesUseCase>(
+        () => _i30.SimilarMoviesUseCase(gh<_i28.SimilarMoviesRepository>()));
+    gh.factory<_i31.SimilarMoviesViewModel>(
+        () => _i31.SimilarMoviesViewModel(gh<_i30.SimilarMoviesUseCase>()));
+    gh.factory<_i32.TopRatedMoviesDataSource>(
+        () => _i33.TopRatedMoviesDataSourceImpl(gh<_i5.ApiManager>()));
+    gh.factory<_i34.TopRatedMoviesRepository>(() =>
+        _i35.TopRatedMoviesRepositoryImpl(gh<_i32.TopRatedMoviesDataSource>()));
+    gh.factory<_i36.TopRatedMoviesUseCase>(
+        () => _i36.TopRatedMoviesUseCase(gh<_i34.TopRatedMoviesRepository>()));
+    gh.factory<_i37.TopRatedViewModel>(
+        () => _i37.TopRatedViewModel(gh<_i36.TopRatedMoviesUseCase>()));
+    gh.factory<_i38.UpCommingMoviesDataSource>(
+        () => _i39.UpCommingMoviesDataSourceImpl(gh<_i5.ApiManager>()));
+    gh.factory<_i40.UpCommingMoviesRepository>(() =>
+        _i41.UpCommingMoviesRepositoryImpl(
+            gh<_i38.UpCommingMoviesDataSource>()));
+    gh.factory<_i42.UpCommingMoviesUseCase>(() =>
+        _i42.UpCommingMoviesUseCase(gh<_i40.UpCommingMoviesRepository>()));
+    gh.factory<_i43.UpCommingMoviesViewModel>(
+        () => _i43.UpCommingMoviesViewModel(gh<_i42.UpCommingMoviesUseCase>()));
     return this;
   }
 }
