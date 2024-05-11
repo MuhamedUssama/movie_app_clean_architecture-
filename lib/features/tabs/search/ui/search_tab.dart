@@ -5,6 +5,7 @@ import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/features/tabs/search/ui/cubit/search_states.dart';
 
 import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/list_separated_movies.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/no_movies_found.dart';
 import 'cubit/search_view_model.dart';
@@ -40,8 +41,10 @@ class _SearchTabState extends State<SearchTab> {
         child: Column(
           children: [
             CustomSearchTextField(
-                controller: viewModel.searchQuery,
-                function: viewModel.getSearchedMovies),
+              controller: viewModel.searchQuery,
+              function: viewModel.getSearchedMovies,
+            ),
+            SizedBox(height: 20.h),
             BlocBuilder<SearchViewModel, SearchStates>(
               bloc: viewModel,
               builder: (context, state) {
@@ -57,7 +60,9 @@ class _SearchTabState extends State<SearchTab> {
                 } else if (state is SearchErrorState) {
                   return CustomErrorWidget(message: state.errorMessage);
                 } else if (state is SearchSuccessState) {
-                  return _buildSearchedMoviesList();
+                  return Expanded(
+                      child:
+                          ListOfSeparatedMovied(movies: state.searchResults));
                 } else if (state is SearchInitialState) {
                   return const NoMoviesFoundWidget();
                 } else {
@@ -67,16 +72,6 @@ class _SearchTabState extends State<SearchTab> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildSearchedMoviesList() {
-    return const Text(
-      "Search Screen",
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 40,
       ),
     );
   }

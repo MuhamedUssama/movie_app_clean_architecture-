@@ -68,4 +68,16 @@ abstract class AppText {
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle searchMovieTitle = TextStyle(
+    color: AppColors.white,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle searchDate = TextStyle(
+    color: AppColors.grey,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+  );
 }
