@@ -62,7 +62,7 @@ class _SearchTabState extends State<SearchTab> {
                 } else if (state is SearchSuccessState) {
                   return Expanded(
                       child:
-                          ListOfSeparatedMovied(movies: state.searchResults));
+                          ListOfSeparatedMovies(movies: state.searchResults));
                 } else if (state is SearchInitialState) {
                   return const NoMoviesFoundWidget();
                 } else {
