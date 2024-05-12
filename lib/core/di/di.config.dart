@@ -47,6 +47,8 @@ import '../../features/tabs/browse/domain/repository/categories_repository.dart'
     as _i48;
 import '../../features/tabs/browse/domain/usecases/online_categories_usecase.dart'
     as _i50;
+import '../../features/tabs/browse/ui/cubit/categories_list/categories_view_model.dart'
+    as _i51;
 import '../../features/tabs/home/data/api/api_manager.dart' as _i5;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source.dart'
     as _i16;
@@ -179,6 +181,8 @@ extension GetItInjectableX on _i1.GetIt {
         _i49.CategoriesRepositoryImpl(gh<_i14.OnlineCategoriesDataSource>()));
     gh.factory<_i50.OnlineCategoriesUseCase>(
         () => _i50.OnlineCategoriesUseCase(gh<_i48.CategoriesRepository>()));
+    gh.factory<_i51.CategoriesViewModel>(
+        () => _i51.CategoriesViewModel(gh<_i50.OnlineCategoriesUseCase>()));
     return this;
   }
 }
