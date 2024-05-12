@@ -1,22 +1,22 @@
-class CategoryDtos {
+class CategoryDto {
   int? id;
   String? name;
 
-  CategoryDtos({
+  CategoryDto({
     this.id,
     this.name,
   });
 
-  CategoryDtos.fromJson(dynamic json) {
+  CategoryDto.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
   }
 
-  CategoryDtos copyWith({
+  CategoryDto copyWith({
     int? id,
     String? name,
   }) =>
-      CategoryDtos(
+      CategoryDto(
         id: id ?? this.id,
         name: name ?? this.name,
       );
