@@ -5,6 +5,7 @@ import 'package:movie_app/config/theme/app_text.dart';
 import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/widgets/error_widget.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
+import 'package:movie_app/features/movies_in_category/ui/category_movies_screen.dart';
 
 import 'cubit/categories_states.dart';
 import 'cubit/categories_view_model.dart';
@@ -44,8 +45,20 @@ class BrowseTab extends StatelessWidget {
                         mainAxisSpacing: 36.h,
                         childAspectRatio: 16 / 10,
                       ),
-                      itemBuilder: (context, index) => CustomCategoryWidget(
-                        categoryName: state.categories?[index].name ?? "",
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CategoryMoviesScreen(
+                                genreId: state.categories![index].id.toString(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: CustomCategoryWidget(
+                          categoryName: state.categories?[index].name ?? "",
+                        ),
                       ),
                     ),
                   );
