@@ -41,6 +41,10 @@ import '../../features/tabs/browse/data/data_sources/remote/online_categories_da
     as _i14;
 import '../../features/tabs/browse/data/data_sources/remote/online_categories_data_source_impl.dart'
     as _i15;
+import '../../features/tabs/browse/data/repository_impl/categories_repository_impl.dart'
+    as _i49;
+import '../../features/tabs/browse/domain/repository/categories_repository.dart'
+    as _i48;
 import '../../features/tabs/home/data/api/api_manager.dart' as _i5;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source.dart'
     as _i16;
@@ -169,6 +173,8 @@ extension GetItInjectableX on _i1.GetIt {
         _i46.UpCommingMoviesUseCase(gh<_i44.UpCommingMoviesRepository>()));
     gh.factory<_i47.UpCommingMoviesViewModel>(
         () => _i47.UpCommingMoviesViewModel(gh<_i46.UpCommingMoviesUseCase>()));
+    gh.factory<_i48.CategoriesRepository>(() =>
+        _i49.CategoriesRepositoryImpl(gh<_i14.OnlineCategoriesDataSource>()));
     return this;
   }
 }
