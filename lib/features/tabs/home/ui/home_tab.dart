@@ -21,32 +21,22 @@ import 'cubit/up_comming_movies/up_comming_states.dart';
 import '../../../../core/widgets/card_of_film.dart';
 import '../../../../core/widgets/custom_recomended_card_widget.dart';
 
-class HomeTab extends StatefulWidget {
+class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
   @override
-  State<HomeTab> createState() => _HomeTabState();
-}
+  Widget build(BuildContext context) {
+    PopularMoviesViewModel popularMoviesViewModel =
+        getIt.get<PopularMoviesViewModel>();
 
-class _HomeTabState extends State<HomeTab> {
-  PopularMoviesViewModel popularMoviesViewModel =
-      getIt.get<PopularMoviesViewModel>();
+    TopRatedViewModel topRatedViewModel = getIt.get<TopRatedViewModel>();
 
-  TopRatedViewModel topRatedViewModel = getIt.get<TopRatedViewModel>();
+    UpCommingMoviesViewModel upCommingViewModel =
+        getIt.get<UpCommingMoviesViewModel>();
 
-  UpCommingMoviesViewModel upCommingViewModel =
-      getIt.get<UpCommingMoviesViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
     popularMoviesViewModel.getPopularMovies();
     topRatedViewModel.getTopRatedMovies();
     upCommingViewModel.getUpCommingMovies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -54,7 +44,7 @@ class _HomeTabState extends State<HomeTab> {
             bloc: popularMoviesViewModel,
             builder: (context, state) {
               if (state is PopularMoviesSuccessState) {
-                return buildPopularWidget(state.data);
+                return buildPopularWidget(state.data, context);
               } else if (state is PopularMoviesErrorState) {
                 return CustomErrorWidget(message: state.message);
               } else {
@@ -81,7 +71,7 @@ class _HomeTabState extends State<HomeTab> {
               }
             },
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 24),
           BlocBuilder<UpCommingMoviesViewModel, UpCommingMoviesStates>(
             bloc: upCommingViewModel,
             builder: (context, state) {
@@ -103,7 +93,8 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Widget buildPopularWidget(List<PopularMovie>? popularMovie) {
+  Widget buildPopularWidget(
+      List<PopularMovie>? popularMovie, BuildContext context) {
     double heightOfImage = 0;
     return CarouselSlider(
       items: popularMovie!.map((move) {
@@ -118,15 +109,11 @@ class _HomeTabState extends State<HomeTab> {
                   errorWidget: (_, __, ___) => Image.asset(
                     AppImages.imageTest,
                     height: MediaQuery.of(context).size.height * .24,
-                    // width: MediaQuery.of(context).size.width * .4,
                     fit: BoxFit.cover,
                   ),
                   height: heightOfImage == 0
                       ? MediaQuery.of(context).size.height * .24
                       : heightOfImage,
-                  // width: widthOfImage == 0
-                  //     ? MediaQuery.of(context).size.width * .26
-                  //     : widthOfImage,
                   fit: BoxFit.fitWidth,
                 ),
                 Padding(
@@ -134,10 +121,10 @@ class _HomeTabState extends State<HomeTab> {
                     bottom: 5,
                     top: 12,
                     right: 10,
-                    left: MediaQuery.of(context).size.width * .36,
+                    left: MediaQuery.of(context).size.width * .4,
                   ),
                   child: Text(
-                    move.originalTitle!,
+                    move.originalTitle ?? "",
                     style: const TextStyle(
                       color: AppColors.white,
                       fontSize: 14,
@@ -151,10 +138,10 @@ class _HomeTabState extends State<HomeTab> {
                     bottom: 10,
                     top: 5,
                     right: 10,
-                    left: MediaQuery.of(context).size.width * .36,
+                    left: MediaQuery.of(context).size.width * .4,
                   ),
                   child: Text(
-                    move.releaseDate!,
+                    move.releaseDate ?? "",
                     style: const TextStyle(
                       color: AppColors.grey,
                       fontSize: 14,
@@ -172,7 +159,7 @@ class _HomeTabState extends State<HomeTab> {
                 child: cardImageOfFilm(
                   context: context,
                   imagePath:
-                      "https://image.tmdb.org/t/p/original/${move.posterPath}",
+                      "https://image.tmdb.org/t/p/original/${move.backdropPath}",
                   moveID: move.id!,
                 ),
               ),
