@@ -52,6 +52,8 @@ class BrowseTab extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => CategoryMoviesScreen(
                                 genreId: state.categories![index].id.toString(),
+                                categoryName:
+                                    state.categories![index].name ?? "",
                               ),
                             ),
                           );

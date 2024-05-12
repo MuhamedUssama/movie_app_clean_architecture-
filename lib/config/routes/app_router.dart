@@ -31,8 +31,10 @@ class AppRouters {
 
       case RoutesName.categoryMoviesScreen:
         return MaterialPageRoute(
-          builder: (context) =>
-              CategoryMoviesScreen(genreId: categoryDto.id.toString()),
+          builder: (context) => CategoryMoviesScreen(
+            genreId: categoryDto.id.toString(),
+            categoryName: categoryDto.name ?? "",
+          ),
         );
 
       default:

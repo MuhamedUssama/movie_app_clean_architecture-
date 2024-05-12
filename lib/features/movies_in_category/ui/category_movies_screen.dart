@@ -5,12 +5,16 @@ import 'cubit/category_movies_view_model.dart';
 
 class CategoryMoviesScreen extends StatelessWidget {
   final String genreId;
-  const CategoryMoviesScreen({super.key, required this.genreId});
+  final String categoryName;
+  const CategoryMoviesScreen(
+      {super.key, required this.genreId, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
     CategoryMoviesViewModel viewModel = getIt.get<CategoryMoviesViewModel>();
     viewModel.getCategoryMovies(genreId);
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text("$categoryName Movies")),
+    );
   }
 }
