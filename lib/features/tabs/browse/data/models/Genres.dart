@@ -1,3 +1,5 @@
+import '../../domain/models/category_dto.dart';
+
 class Genres {
   int? id;
   String? name;
@@ -25,5 +27,9 @@ class Genres {
     map['id'] = id;
     map['name'] = name;
     return map;
+  }
+
+  CategoryDto toCategory() {
+    return CategoryDto(id: id, name: name);
   }
 }
