@@ -128,7 +128,7 @@ class MovieDetailsScreen extends StatelessWidget {
             context: context,
             moveID: movies[index].id ?? 1041613,
             imagePath:
-                AppStrings.networkImageBaseUrl + movies[index].posterPath!,
+                "https://image.tmdb.org/t/p/original/${movies[index].backdropPath}",
             movieTitle: movies[index].title ?? "",
             releaseDate: movies[index].releaseDate ?? "",
             voteAverage: movies[index].voteAverage ?? 0,

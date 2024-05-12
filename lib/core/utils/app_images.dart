@@ -12,4 +12,6 @@ abstract class AppImages {
       "https://www.joshuahimalayas.org/public/data_not_found.png";
   static const String searshNotFound =
       "${baseUrl}Icon material-local-movies.png";
+
+  static const String categoryImg = "${baseUrl}category_img.png";
 }

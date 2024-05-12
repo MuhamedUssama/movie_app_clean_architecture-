@@ -80,4 +80,16 @@ abstract class AppText {
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle categoryScreenTitle = TextStyle(
+    color: AppColors.white,
+    fontSize: 22.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle ctegoryName = TextStyle(
+    color: AppColors.white,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
 }
