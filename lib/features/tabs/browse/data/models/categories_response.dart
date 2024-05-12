@@ -1,13 +1,13 @@
 import 'genres.dart';
 
-class CategoriesResponses {
+class CategoriesResponse {
   List<Genres>? genres;
 
-  CategoriesResponses({
+  CategoriesResponse({
     this.genres,
   });
 
-  CategoriesResponses.fromJson(dynamic json) {
+  CategoriesResponse.fromJson(dynamic json) {
     if (json['genres'] != null) {
       genres = [];
       json['genres'].forEach((v) {
@@ -15,10 +15,10 @@ class CategoriesResponses {
       });
     }
   }
-  CategoriesResponses copyWith({
+  CategoriesResponse copyWith({
     List<Genres>? genres,
   }) =>
-      CategoriesResponses(
+      CategoriesResponse(
         genres: genres ?? this.genres,
       );
   Map<String, dynamic> toJson() {
