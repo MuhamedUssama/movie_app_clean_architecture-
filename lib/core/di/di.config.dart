@@ -47,8 +47,7 @@ import '../../features/tabs/browse/domain/repository/categories_repository.dart'
     as _i48;
 import '../../features/tabs/browse/domain/usecases/online_categories_usecase.dart'
     as _i50;
-import '../../features/tabs/browse/ui/cubit/categories_list/categories_view_model.dart'
-    as _i51;
+import '../../features/tabs/browse/ui/cubit/categories_view_model.dart' as _i51;
 import '../../features/tabs/home/data/api/api_manager.dart' as _i5;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source.dart'
     as _i16;

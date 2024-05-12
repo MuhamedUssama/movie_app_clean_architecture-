@@ -6,8 +6,8 @@ import 'package:movie_app/core/di/di.dart';
 import 'package:movie_app/core/widgets/error_widget.dart';
 import 'package:movie_app/core/widgets/loading_widget.dart';
 
-import 'cubit/categories_list/categories_states.dart';
-import 'cubit/categories_list/categories_view_model.dart';
+import 'cubit/categories_states.dart';
+import 'cubit/categories_view_model.dart';
 import 'widgets/custom_category_widget.dart';
 
 class BrowseTab extends StatelessWidget {
@@ -35,8 +35,6 @@ class BrowseTab extends StatelessWidget {
                 if (state is CategoriesErrorState) {
                   return CustomErrorWidget(message: state.errorMessage);
                 } else if (state is CategoriesSuccessState) {
-                  print(
-                      "Number of categories >>>>>>>>>>> ${state.categories?.length}");
                   return Expanded(
                     child: GridView.builder(
                       itemCount: state.categories?.length,
