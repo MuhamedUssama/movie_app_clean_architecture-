@@ -33,4 +33,9 @@ class CacheMovieDetails {
       await box.delete(movieId);
     }
   }
+
+  static Future<bool> hasData() async {
+    var box = await Hive.openBox('saveMovieDetails');
+    return box.isNotEmpty;
+  }
 }

@@ -56,12 +56,12 @@ import '../../features/tabs/browse/data/data_sources/remote/online_categories_da
 import '../../features/tabs/browse/data/data_sources/remote/online_categories_data_source_impl.dart'
     as _i22;
 import '../../features/tabs/browse/data/repository_impl/categories_repository_impl.dart'
-    as _i56;
-import '../../features/tabs/browse/domain/repository/categories_repository.dart'
-    as _i55;
-import '../../features/tabs/browse/domain/usecases/online_categories_usecase.dart'
     as _i57;
-import '../../features/tabs/browse/ui/cubit/categories_view_model.dart' as _i58;
+import '../../features/tabs/browse/domain/repository/categories_repository.dart'
+    as _i56;
+import '../../features/tabs/browse/domain/usecases/online_categories_usecase.dart'
+    as _i58;
+import '../../features/tabs/browse/ui/cubit/categories_view_model.dart' as _i59;
 import '../../features/tabs/home/data/api/api_manager.dart' as _i5;
 import '../../features/tabs/home/data/data_source/remote/popular_movies/popular_movies_data_source.dart'
     as _i23;
@@ -111,6 +111,8 @@ import '../../features/tabs/search/domain/repository/search_repository.dart'
     as _i33;
 import '../../features/tabs/search/domain/usecases/search_usecase.dart' as _i35;
 import '../../features/tabs/search/ui/cubit/search_view_model.dart' as _i36;
+import '../../features/tabs/watch_list/ui/cubit/watch_list_viw_model.dart'
+    as _i55;
 import '../api/api_consumer.dart' as _i3;
 import '../api/dio_consumer.dart' as _i4;
 
@@ -200,12 +202,13 @@ extension GetItInjectableX on _i1.GetIt {
         _i53.UpCommingMoviesUseCase(gh<_i51.UpCommingMoviesRepository>()));
     gh.factory<_i54.UpCommingMoviesViewModel>(
         () => _i54.UpCommingMoviesViewModel(gh<_i53.UpCommingMoviesUseCase>()));
-    gh.factory<_i55.CategoriesRepository>(() =>
-        _i56.CategoriesRepositoryImpl(gh<_i21.OnlineCategoriesDataSource>()));
-    gh.factory<_i57.OnlineCategoriesUseCase>(
-        () => _i57.OnlineCategoriesUseCase(gh<_i55.CategoriesRepository>()));
-    gh.factory<_i58.CategoriesViewModel>(
-        () => _i58.CategoriesViewModel(gh<_i57.OnlineCategoriesUseCase>()));
+    gh.factory<_i55.WatchListViewModel>(() => _i55.WatchListViewModel());
+    gh.factory<_i56.CategoriesRepository>(() =>
+        _i57.CategoriesRepositoryImpl(gh<_i21.OnlineCategoriesDataSource>()));
+    gh.factory<_i58.OnlineCategoriesUseCase>(
+        () => _i58.OnlineCategoriesUseCase(gh<_i56.CategoriesRepository>()));
+    gh.factory<_i59.CategoriesViewModel>(
+        () => _i59.CategoriesViewModel(gh<_i58.OnlineCategoriesUseCase>()));
     return this;
   }
 }
