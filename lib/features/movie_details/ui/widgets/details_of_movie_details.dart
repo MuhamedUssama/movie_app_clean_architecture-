@@ -4,9 +4,8 @@ import 'package:movie_app/features/movie_details/domain/models/movie_details/mov
 
 import '../../../../config/theme/app_colors.dart';
 import '../../../../config/theme/app_text.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/widgets/card_of_film.dart';
 import 'custom_geners_widget.dart';
+import 'custom_movie_image_card.dart';
 
 class DetailsOfMovieDetails extends StatelessWidget {
   final MovieDetails movie;
@@ -52,10 +51,9 @@ class DetailsOfMovieDetails extends StatelessWidget {
             children: [
               Expanded(
                 flex: 35,
-                child: cardImageOfFilm(
+                child: customMovieDetailsImageCard(
                   context: context,
-                  imagePath: AppStrings.networkImageBaseUrl + movie.posterPath!,
-                  moveID: movie.id!,
+                  movie: movie,
                   heightOfImage: 200.h,
                   widthOfImage: 130.w,
                   heightOfTicket: 36.h,

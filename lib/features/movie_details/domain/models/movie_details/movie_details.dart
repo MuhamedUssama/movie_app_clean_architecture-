@@ -1,32 +1,64 @@
-class MovieDetails {
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 0)
+class MovieDetails extends HiveObject {
+  @HiveField(0)
   bool? adult;
+  @HiveField(1)
   String? backdropPath;
+  @HiveField(2)
   dynamic belongsToCollection;
+  @HiveField(3)
   int? budget;
+  @HiveField(4)
   List<Genres>? genres;
+  @HiveField(5)
   String? homepage;
+  @HiveField(6)
   int? id;
+  @HiveField(7)
   String? imdbId;
+  @HiveField(8)
   List<String>? originCountry;
+  @HiveField(9)
   String? originalLanguage;
+  @HiveField(10)
   String? originalTitle;
+  @HiveField(11)
   String? overview;
+  @HiveField(12)
   double? popularity;
+  @HiveField(13)
   String? posterPath;
+  @HiveField(14)
   List<ProductionCompanies>? productionCompanies;
+  @HiveField(15)
   List<ProductionCountries>? productionCountries;
+  @HiveField(16)
   String? releaseDate;
+  @HiveField(17)
   int? revenue;
+  @HiveField(18)
   int? runtime;
+  @HiveField(19)
   List<SpokenLanguages>? spokenLanguages;
+  @HiveField(20)
   String? status;
+  @HiveField(21)
   String? tagline;
+  @HiveField(22)
   String? title;
+  @HiveField(23)
   bool? video;
+  @HiveField(24)
   double? voteAverage;
+  @HiveField(25)
   int? voteCount;
+  @HiveField(26)
   bool? success;
+  @HiveField(27)
   int? statusCode;
+  @HiveField(28)
   String? statusMessage;
 
   MovieDetails({
@@ -214,9 +246,13 @@ class MovieDetails {
   }
 }
 
+@HiveType(typeId: 1)
 class SpokenLanguages {
+  @HiveField(0)
   String? englishName;
+  @HiveField(1)
   String? iso6391;
+  @HiveField(2)
   String? name;
 
   SpokenLanguages({
@@ -250,8 +286,11 @@ class SpokenLanguages {
   }
 }
 
+@HiveType(typeId: 2)
 class ProductionCountries {
+  @HiveField(0)
   String? iso31661;
+  @HiveField(1)
   String? name;
 
   ProductionCountries({
@@ -280,10 +319,15 @@ class ProductionCountries {
   }
 }
 
+@HiveType(typeId: 3)
 class ProductionCompanies {
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? logoPath;
+  @HiveField(2)
   String? name;
+  @HiveField(3)
   String? originCountry;
 
   ProductionCompanies({
@@ -322,8 +366,11 @@ class ProductionCompanies {
   }
 }
 
+@HiveType(typeId: 4)
 class Genres {
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? name;
 
   Genres({

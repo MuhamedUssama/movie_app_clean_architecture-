@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import '../../features/movie_details/domain/models/movie_details/movie_details.dart';
 
-class WordTypeAdapter extends TypeAdapter<MovieDetails> {
+class MovieTypeAdapter extends TypeAdapter<MovieDetails> {
   @override
   MovieDetails read(BinaryReader reader) {
     return MovieDetails(
