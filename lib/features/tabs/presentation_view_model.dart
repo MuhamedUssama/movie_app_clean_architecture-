@@ -14,10 +14,10 @@ class PresentationScreenViewModel extends Cubit<PresentationScreenStates> {
   int currentIndex = 0;
 
   List<Widget> tabs = [
-    HomeTab(),
-    SearchTab(),
-    BrowseTab(),
-    WatchListTab(),
+    const HomeTab(),
+    const SearchTab(),
+    const BrowseTab(),
+    const WatchListTab(),
   ];
 
   void onTabClick(int tabIndex) {

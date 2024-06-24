@@ -1,6 +1,6 @@
 import 'package:movie_app/features/tabs/home/data/models/result.dart';
 
-import 'Dates.dart';
+import 'dates.dart';
 
 class UpCommingMoviesResponses {
   Dates? dates;

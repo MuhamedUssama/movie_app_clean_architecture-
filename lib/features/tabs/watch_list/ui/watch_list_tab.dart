@@ -23,17 +23,17 @@ class _WatchListTabState extends State<WatchListTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved Movies'),
+        title: const Text('Saved Movies'),
       ),
       body: FutureBuilder<List<MovieDetails>>(
         future: _moviesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No movies saved.'));
+            return const Center(child: Text('No movies saved.'));
           } else {
             var movies = snapshot.data!;
             return ListView.builder(
