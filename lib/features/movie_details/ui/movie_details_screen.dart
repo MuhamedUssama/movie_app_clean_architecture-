@@ -86,7 +86,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   children: [
                     Text(
                       "More Like This",
-                      style: AppText.MovieDetailslistTitle,
+                      style: AppText.movieDetailslistTitle,
                     ),
                     SizedBox(height: 14.h),
                     BlocBuilder<SimilarMoviesViewModel, SimilarMoviesStates>(
