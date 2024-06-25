@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/di/di.dart';
+import 'package:movie_app/core/widgets/list_separated_movies.dart';
+import 'package:movie_app/features/tabs/watch_list/ui/cubit/watch_list_states.dart';
 
-import '../../../movie_details/data/data_sources/local/cache_movie_details.dart';
-import '../../../movie_details/domain/models/movie_details/movie_details.dart';
+import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/widgets/no_movies_found.dart';
+
+import 'cubit/watch_list_viw_model.dart';
 
 class WatchListTab extends StatefulWidget {
   const WatchListTab({super.key});
@@ -11,12 +19,11 @@ class WatchListTab extends StatefulWidget {
 }
 
 class _WatchListTabState extends State<WatchListTab> {
-  late Future<List<MovieDetails>> _moviesFuture;
-
+  final WatchListViewModel viewModel = getIt.get<WatchListViewModel>();
   @override
   void initState() {
     super.initState();
-    _moviesFuture = CacheMovieDetails.getMovieDetails();
+    viewModel.getWatchListMovies();
   }
 
   @override
@@ -25,29 +32,37 @@ class _WatchListTabState extends State<WatchListTab> {
       appBar: AppBar(
         title: const Text('Saved Movies'),
       ),
-      body: FutureBuilder<List<MovieDetails>>(
-        future: _moviesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No movies saved.'));
-          } else {
-            var movies = snapshot.data!;
-            return ListView.builder(
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                var movie = movies[index];
-                return ListTile(
-                  title: Text(movie.title ?? 'No title'),
-                  subtitle: Text(movie.overview ?? 'No overview'),
-                );
-              },
-            );
-          }
-        },
+      body: Padding(
+        padding: EdgeInsets.only(
+          top: 20.h,
+          right: 20.w,
+          left: 20.w,
+        ),
+        child: BlocBuilder<WatchListViewModel, WatchListStates>(
+          bloc: viewModel,
+          builder: (context, state) {
+            if (state is WatchListInitialState) {
+              return const NoMoviesFoundWidget();
+            } else if (state is WatchListLoadingState) {
+              return const Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(child: LoadingWidget()),
+                  ],
+                ),
+              );
+            } else if (state is WatchListErrorState) {
+              return CustomErrorWidget(message: state.message);
+            } else if (state is WatchListSuccessState) {
+              return Expanded(
+                child: ListOfSeparatedMovies(movies: state.movies),
+              );
+            } else {
+              return const NoMoviesFoundWidget();
+            }
+          },
+        ),
       ),
     );
   }
