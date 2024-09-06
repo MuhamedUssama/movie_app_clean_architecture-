@@ -31,10 +31,10 @@ class CustomRecomendedCardWidget extends StatelessWidget {
 
   String truncateTitle(String title) {
     List<String> words = title.split(' ');
-    if (words.length <= 4) {
+    if (words.length <= 1) {
       return title;
     } else {
-      return "${words.sublist(0, 4).join(' ')}..";
+      return "${words.sublist(0, 1).join(' ')}..";
     }
   }
 
